@@ -98,7 +98,7 @@ app.use('/users', isAuth(), userRoute);
 app.use('/auth', authRoute);
 app.use('/cart', isAuth(), cartRoute);
 app.use('/orders', isAuth(), orderRoute);
-
+app.get('*', (req, res) => res.sendFile(path.resolve('build', 'index.html')));
 // Passport Strategies
 passport.use(
   'local',
@@ -167,7 +167,7 @@ passport.serializeUser(function (user, cb) {
 // This is your test secret API key.
 const stripe = require('stripe')(process.env.STRIPE_SERVER_KEY);
 app.post('/create-payment-intent', async (req, res) => {
-  const { totalAmount } = req.body;
+  const { totalAmount, orderId } = req.body;
 
   // Create a PaymentIntent with the order amount and currency
   const paymentIntent = await stripe.paymentIntents.create({
@@ -175,6 +175,9 @@ app.post('/create-payment-intent', async (req, res) => {
     currency: 'inr',
     automatic_payment_methods: {
       enabled: true,
+    },
+    metadata: {
+      orderId,
     },
   });
 
