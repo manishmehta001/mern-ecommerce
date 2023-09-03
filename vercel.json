@@ -12,67 +12,67 @@
   "routes": [
     {
       "src": "/products",
-      "dest": "app.js"
+      "dest": "server.js"
     },
     {
       "src": "/products/(.*)",
-      "dest": "app.js"
+      "dest": "server.js"
     },
     {
       "src": "/categories",
-      "dest": "app.js"
+      "dest": "server.js"
     },
     {
       "src": "/categories/(.*)",
-      "dest": "app.js"
+      "dest": "server.js"
     },
     {
       "src": "/brands",
-      "dest": "app.js"
+      "dest": "server.js"
     },
     {
       "src": "/brands/(.*)",
-      "dest": "app.js"
+      "dest": "server.js"
     },
     {
       "src": "/users",
-      "dest": "app.js"
+      "dest": "server.js"
     },
     {
       "src": "/users/(.*)",
-      "dest": "app.js"
+      "dest": "server.js"
     },
     {
       "src": "/auth",
-      "dest": "app.js"
+      "dest": "server.js"
     },
     {
       "src": "/auth/(.*)",
-      "dest": "app.js"
+      "dest": "server.js"
     },
     {
       "src": "/cart",
-      "dest": "app.js"
+      "dest": "server.js"
     },
     {
       "src": "/cart/(.*)",
-      "dest": "app.js"
+      "dest": "server.js"
     },
     {
       "src": "/orders",
-      "dest": "app.js"
+      "dest": "server.js"
     },
     {
       "src": "/orders/(.*)",
-      "dest": "app.js"
+      "dest": "server.js"
     },
     {
       "src": "/webhook",
-      "dest": "app.js"
+      "dest": "server.js"
     },
     {
       "src": "/create-payment-intent",
-      "dest": "app.js"
+      "dest": "server.js"
     },
     {
       "src": "/",
