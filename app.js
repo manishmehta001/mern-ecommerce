@@ -1,5 +1,4 @@
 require('dotenv').config();
-//IntqYBhz9Mqgm4X2
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
@@ -18,6 +17,7 @@ const authRoute = require('./routes/authRoute');
 const cartRoute = require('./routes/cartRoute');
 const orderRoute = require('./routes/orderRoute');
 const User = require('./model/userModel');
+const Order = require('./model/orderModel');
 const { isAuth, sanitizeUser, cookieExtractor } = require('./services/common');
 const app = express();
 const path = require('path');
@@ -33,7 +33,7 @@ const endpointSecret = process.env.ENDPOINT_SECRET;
 app.post(
   '/webhook',
   express.raw({ type: 'application/json' }),
-  (request, response) => {
+  async (request, response) => {
     const sig = request.headers['stripe-signature'];
 
     let event;
@@ -49,7 +49,11 @@ app.post(
     switch (event.type) {
       case 'payment_intent.succeeded':
         const paymentIntentSucceeded = event.data.object;
-        console.log({ paymentIntentSucceeded });
+        const order = await Order.findById(
+          paymentIntentSucceeded.metadata.orderId
+        );
+        order.paymentStatus = 'received';
+        await order.save();
         // Then define and call a function to handle the event payment_intent.succeeded
         break;
       // ... handle other event types
